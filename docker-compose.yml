@@ -1,0 +1,26 @@
+version: "3"
+services:
+  listing-service:
+    build: "./listing-service"
+    depends_on:
+      - listing-service-db
+    volumes:
+      - ./listing-service:/opt/app
+
+  listing-service-db:
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=db
+    image: mysql:5.7.20
+
+  users-service:
+    build: "./users-service"
+    depends_on:
+      - users-service-db
+    volumes:
+      - ./users-service:/opt/app
+  users-service-db:
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=db
+    image: mysql:5.7.20
