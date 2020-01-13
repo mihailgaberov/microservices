@@ -1,26 +1,43 @@
 version: "3"
 services:
-  listing-service:
-    build: "./listing-service"
+  listings-service:
+    build:
+      context: "."
+      dockerfile: "./listings-service/Dockerfile"
     depends_on:
-      - listing-service-db
+      - listings-service-db
+    environment:
+      - DB_URI=mysql://root:password@listings-service-db/db?charset=UTF8
+    ports:
+      - "7100:7100"
     volumes:
-      - ./listing-service:/opt/app
+      - ./listings-service:/opt/app
 
-  listing-service-db:
+  listings-service-db:
     environment:
       - MYSQL_ROOT_PASSWORD=password
       - MYSQL_DATABASE=db
     image: mysql:5.7.20
+    ports:
+      - 0.0.0.0:7200:3306
 
   users-service:
-    build: "./users-service"
+    build:
+      context: "."
+      dockerfile: "./users-service/Dockerfile"
     depends_on:
       - users-service-db
+    environment:
+      - DB_URI=mysql://root:password@users-service-db/db?charset=UTF8
+    ports:
+      - "7101:7101"
     volumes:
       - ./users-service:/opt/app
+
   users-service-db:
     environment:
       - MYSQL_ROOT_PASSWORD=password
       - MYSQL_DATABASE=db
     image: mysql:5.7.20
+    ports:
+      - 0.0.0.0:7201:3306
