@@ -1,3 +1,3 @@
 import path from "path";
 
-console.log("User Serbice Working...");
+console.log("User Service Working...");
