@@ -2,7 +2,6 @@ module.exports.up = (queryInterface, DataTypes) => {
   return queryInterface.createTable("users", {
     id: {
       allowNull: false,
-      autoIncrement: true,
       primaryKey: true,
       type: DataTypes.UUID
     },
