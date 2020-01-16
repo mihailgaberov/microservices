@@ -31,4 +31,4 @@ module.exports.up = (queryInterface, DataTypes) => {
     charset: "utf8"
   }
   )
-}
+};
