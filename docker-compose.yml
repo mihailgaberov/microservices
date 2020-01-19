@@ -1,5 +1,17 @@
 version: "3"
 services:
+  api-gateway:
+    build:
+      context: "."
+      dockerfile: "./api-gateway/Dockerfile"
+    depends_on:
+      - listings-service
+      - users-service
+    ports:
+      - "7000:7000"
+    volumes:
+      - ./api-gateway:/opt/app
+
   listings-service:
     build:
       context: "."

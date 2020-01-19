@@ -2,7 +2,7 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import express from "express";
 
-import accessEnv from "../helpers/accessEnv";
+import accessEnv from "#root/helpers/accessEnv";
 import setupRoutes from "./routes";
 
 const PORT = accessEnv("PORT", 7100);
