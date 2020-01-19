@@ -1,3 +1,3 @@
-import path from "path";
-
-console.log("User Service is working...");
+import "@babel/polyfill";
+import "#root/db/connection";
+import "#root/server/startServer";
