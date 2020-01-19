@@ -3,6 +3,7 @@ import cors from "cors";
 import express from "express";
 
 import accessEnv from "../helpers/accessEnv";
+import setupRoutes from "./routes";
 
 const PORT = accessEnv("PORT", 7100);
 
@@ -16,6 +17,8 @@ app.use(
     credentials: true
   })
 );
+
+setupRoutes(app);
 
 app.listen(PORT, "0.0.0.0", () => {
   console.info(`Listings service listening on ${PORT}`);
