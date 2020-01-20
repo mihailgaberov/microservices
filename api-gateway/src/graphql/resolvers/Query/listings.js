@@ -1,11 +1,7 @@
+import ListingsService from "#root/adapters/ListingsService";
+
 const listingsResolver = async () => {
-  return [
-    {
-      description: "boooahhh",
-      id: 1,
-      title: "test"
-    }
-  ]
+  return await ListingsService.fetchAllListings();
 };
 
 export default listingsResolver;
