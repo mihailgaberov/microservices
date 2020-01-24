@@ -1,7 +1,8 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "./connection";
 
-export class User extends Model {}
+export class User extends Model {
+}
 
 User.init(
   {
@@ -22,9 +23,38 @@ User.init(
   },
   {
     defaultScope: {
-      rawAttributes: {exclude: ["passwordHash"]},
+      rawAttributes: { exclude: ["passwordHash"] },
     },
     modelName: "users",
     sequelize
   },
 );
+
+export class UserSession extends Model {
+}
+
+UserSession.init({
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.UUID
+    },
+    userId: {
+      allowNull: false,
+      references: {
+        key: "id",
+        model: "users"
+      },
+      type: DataTypes.UUID
+    },
+    expiresdAt: {
+      allowNull: false,
+      type: DataTypes.DATE
+    },
+  },
+  {
+    modelName: "UserSessions",
+    paranoid: false,
+    sequelize,
+    updatedAt: false
+  });
