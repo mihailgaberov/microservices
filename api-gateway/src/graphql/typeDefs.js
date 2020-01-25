@@ -1,6 +1,8 @@
 import { gql } from "apollo-server";
 
 const typeDefs = gql`
+  scalar Date
+
   type Listings {
     description: String!,
     id: ID,
