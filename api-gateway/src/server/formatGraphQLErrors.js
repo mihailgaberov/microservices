@@ -8,7 +8,7 @@ const formatGraphQLErrors = error => {
   }
   catch (e) {}
 
-  return null;
+  return error;
 };
 
 
