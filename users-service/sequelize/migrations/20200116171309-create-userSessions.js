@@ -17,15 +17,6 @@ module.exports.up = (queryInterface, DataTypes) => {
       allowNull: false,
       type: DataTypes.DATE
     },
-    email: {
-      allowNull: false,
-      type: DataTypes.STRING,
-      unique: true
-    },
-    passwordHash: {
-      allowNull: false,
-      type: DataTypes.CHAR(64)
-    },
     createdAt: {
       allowNull: false,
       type: DataTypes.DATE

@@ -1,8 +1,7 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "./connection";
 
-export class User extends Model {
-}
+export class User extends Model {}
 
 User.init(
   {
@@ -30,8 +29,7 @@ User.init(
   },
 );
 
-export class UserSession extends Model {
-}
+export class UserSession extends Model {}
 
 UserSession.init({
     id: {
