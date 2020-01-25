@@ -13,7 +13,7 @@ const setupRoutes = app => {
     }
 
     try {
-      const user = User.findOne({ attributes: {}, where: { email: req.body.email} });
+      const user = await User.findOne({ attributes: {}, where: { email: req.body.email } });
 
       if (!user) {
         return next(new Error("Invalid email."));
@@ -25,7 +25,7 @@ const setupRoutes = app => {
 
       const expiresAt = addHours(new Date(), USER_SESSION_EXPIRY_HOURS);
       const sessionToken = generateUUID();
-      const userSession = UserSession.create({
+      const userSession = await UserSession.create({
         expiresAt,
         id: sessionToken,
         userId: user.id
@@ -34,7 +34,7 @@ const setupRoutes = app => {
       return res.json(userSession);
 
     } catch (e) {
-
+      return next(e);
     }
   });
 
