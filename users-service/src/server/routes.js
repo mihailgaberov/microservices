@@ -24,7 +24,9 @@ const setupRoutes = app => {
       }
 
       const expiresAt = addHours(new Date(), USER_SESSION_EXPIRY_HOURS);
+
       const sessionToken = generateUUID();
+
       const userSession = await UserSession.create({
         expiresAt,
         id: sessionToken,
