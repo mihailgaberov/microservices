@@ -6,7 +6,7 @@ const Container = styled.div`
   display: flex;
   flex-flow: row nowrap;
   margin: 0 auto;
-  width: 80rem;
+  width: 80%;
 `;
 
 const Content = styled.div`
