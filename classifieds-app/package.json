@@ -10,8 +10,9 @@
     "parcel-bundler": "^1.12.4"
   },
   "dependencies": {
-    "react": ">= 16.8.0",
+    "react": "^16.8.0",
     "react-dom": ">= 16.8.0",
+    "react-hook-form": "^4.7.1",
     "react-is": ">= 16.8.0",
     "styled-components": "^5.0.0"
   },

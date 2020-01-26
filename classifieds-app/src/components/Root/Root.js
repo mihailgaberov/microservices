@@ -12,11 +12,9 @@ const Container = styled.div`
 const Content = styled.div`
   flex: 1;
   margin-right: 1rem; 
-  background-color: blue;
 `;
 
 const Sidebar = styled.div`
-background-color: red;
   flex: 0 auto;
   width: 10rem;
 `;
