@@ -28,6 +28,7 @@ const typeDefs = gql`
   
   type Query {
     listings: [Listings!]!
+    userSession(me: Boolean!): UserSession
   }
 `;
 
