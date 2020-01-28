@@ -25,7 +25,7 @@ const LoginButton = styled.button`
 `;
 
 const mutation = gql`
-  mutation($email: String!, $password: String! ) {
+  mutation($email: String!, $password: String!) {
     createUserSession(email: $email, password: $password) {
       id
       user {
