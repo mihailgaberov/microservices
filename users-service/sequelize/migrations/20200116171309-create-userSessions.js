@@ -13,18 +13,9 @@ module.exports.up = (queryInterface, DataTypes) => {
       },
       type: DataTypes.UUID
     },
-    expiresdAt: {
+    expiresAt: {
       allowNull: false,
       type: DataTypes.DATE
-    },
-    email: {
-      allowNull: false,
-      type: DataTypes.STRING,
-      unique: true
-    },
-    passwordHash: {
-      allowNull: false,
-      type: DataTypes.CHAR(64)
     },
     createdAt: {
       allowNull: false,
@@ -35,6 +26,6 @@ module.exports.up = (queryInterface, DataTypes) => {
     charset: "utf8"
   }
   )
-}
+};
 
 module.exports.down =  queryInterface => queryInterface.dropTable("userSessions");
