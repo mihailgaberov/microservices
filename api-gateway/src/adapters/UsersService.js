@@ -3,7 +3,7 @@ import got from "got";
 const USERS_SERVICE_URI = "http://users-service:7101";
 
 export default class UsersService {
-  static async createUser({email, password}) {
+  static async createUser({ email, password }) {
     const body = await got.post(`${USERS_SERVICE_URI}/users`, {
       json: { email, password }
     }).json();
@@ -15,8 +15,13 @@ export default class UsersService {
     return body
   }
 
-  static async createUserSession({email, password}) {
-    const body = await got.post(`${USERS_SERVICE_URI}/sessions`, { json: { email, password }}).json();
+  static async createUserSession({ email, password }) {
+    const body = await got.post(`${USERS_SERVICE_URI}/sessions`, { json: { email, password } }).json();
+    return body;
+  }
+
+  static async fetchUserSession({ sessionId }) {
+    const body = await got.get(`${USERS_SERVICE_URI}/sessions/${sessionId}`).json();
     return body;
   }
 }
