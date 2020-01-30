@@ -3,7 +3,6 @@ import { User, UserSession } from "#root/db/models";
 import generateUUID from "#root/helpers/generateUUID";
 import hashPassword from "#root/helpers/hashPassword";
 import passwordCompareSync from "#root/helpers/passwordCompareSync";
-import UsersService from "#root/api-gateway/src/adapters/UsersService";
 
 const USER_SESSION_EXPIRY_HOURS = 1;
 
@@ -43,11 +42,13 @@ const setupRoutes = app => {
 
   app.get("/sessions/:sessionId", async (req, res, next) => {
     try {
-      const userSession = await UsersService.findByPk(req.params.sessionId);
+      const userSession = await UserSession.findByPk(req.params.sessionId);
 
       if (!userSession) return next(new Error("Invalid session ID"));
-    } catch (e) {
 
+      return res.json(userSession);
+    } catch (e) {
+      return next(e);
     }
   });
 
