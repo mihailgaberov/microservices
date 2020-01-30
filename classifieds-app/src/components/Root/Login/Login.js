@@ -46,7 +46,7 @@ const Login = () => {
 
   const onSubmit = handleSubmit(async ({ email, password }) => {
     const result = await createUserSession({ variables: {email, password}});
-    console.log('result": ', result);
+    console.log('>>>result": ', result);
   });
 
   return <form onSubmit={onSubmit}>
