@@ -30,7 +30,7 @@ app.use(
   })
 );
 
-apolloServer.use(injectSession);
+app.use(injectSession);
 
 apolloServer.applyMiddleware({ app, cors: false, path: "/graphql"});
 
