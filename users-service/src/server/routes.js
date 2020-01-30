@@ -3,7 +3,7 @@ import { User, UserSession } from "#root/db/models";
 import generateUUID from "#root/helpers/generateUUID";
 import hashPassword from "#root/helpers/hashPassword";
 import passwordCompareSync from "#root/helpers/passwordCompareSync";
-import UsersService from "../../../api-gateway/src/adapters/UsersService";
+import UsersService from "#root/api-gateway/src/adapters/UsersService";
 
 const USER_SESSION_EXPIRY_HOURS = 1;
 
