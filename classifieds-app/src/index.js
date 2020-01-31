@@ -3,11 +3,11 @@ import React from "react";
 import { render } from "react-dom";
 import { ApolloProvider } from "react-apollo";
 import { Provider } from "react-redux";
-import graphqlClient from "#root/api/graphqlClient";
 import Root from "#root/components/Root";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 
-import store from "./store";
+import graphqlClient from "#root/api/graphqlClient";
+import store from "#root/store";
 import * as theme from "./theme";
 
 const GlobalStyle = createGlobalStyle`
