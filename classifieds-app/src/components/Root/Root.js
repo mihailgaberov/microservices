@@ -1,6 +1,8 @@
-import React from "react";
+import React, {useState, useEffect } from "react";
+import gql from "graphql-tag";
 import styled from "styled-components";
-import Login from "./Login";
+import AccountDetails from "./AccountDetails";
+import graphqlClient from "#root/api/graphqlClient";
 
 const Container = styled.div`
   display: flex;
@@ -26,11 +28,37 @@ const Wrapper = styled.div`
   padding: 1rem;
 `;
 
+const query = gql`
+{
+  userSession(me: true) {
+    id
+    user {
+      email
+      id
+    }
+  }
+}
+`;
+
 const Root = () => {
+  const [initialised, setInitialised] = useState(false);
+
+  useEffect(() => {
+    graphqlClient.query(({query}).then(({data}) => {
+      if (data.userSession) {
+        dispatch(setSession(data.userSession));
+      }
+      setInitialised(true);
+    }));
+  }, []);
+
+  if (!initialised) return "Lloading...";
+
+
   return <Wrapper>
     <Container>
       <Content>content</Content>
-      <Sidebar><Login /></Sidebar>
+      <Sidebar><AccountDetails /></Sidebar>
     </Container>
   </Wrapper>
 };
