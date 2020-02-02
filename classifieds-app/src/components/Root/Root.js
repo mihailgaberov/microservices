@@ -55,9 +55,7 @@ const Root = () => {
         dispatch(setSession(data.userSession));
       }
       setInitialised(true);
-      console.log('>>>inside: ', data);
     });
-    console.log('>>>>>>>>>> out of query');
   }, []);
 
   if (!initialised) return "Loading...";

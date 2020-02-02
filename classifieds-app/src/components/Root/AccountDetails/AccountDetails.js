@@ -9,10 +9,6 @@ const AccountDetails = () => {
   const session = useSelector(state => state.session);
   const [isSigningUp, setIsSigningUp] = useState(false);
 
-  setTimeout(() => {
-    console.log('>>>> session: ', session);
-  }, 200);
-
   if (session) return <Account />;
 
   return isSigningUp ? (
