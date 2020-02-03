@@ -1,7 +1,9 @@
 import UsersService from "#root/adapters/UsersService";
 
 const deleteUserSessionResolver = async (obj, { sessionId }, context) => {
-  await  UsersService.deleteUserSession({ sessionId });
+  const body = UsersService.deleteUserSession({ sessionId });
+
+  console.log('>>>deleteUserSessionResolver body:', body);
 
   context.res.clearCookie("userSessionId");
 
