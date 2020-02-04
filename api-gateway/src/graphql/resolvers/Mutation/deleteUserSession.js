@@ -1,13 +1,13 @@
 import UsersService from "#root/adapters/UsersService";
 
 const deleteUserSessionResolver = async (obj, { sessionId }, context) => {
-  const body = UsersService.deleteUserSession({ sessionId });
-
-  console.log('>>>deleteUserSessionResolver body:', body);
-
-  context.res.clearCookie("userSessionId");
-
-  return true;
+  try {
+    await UsersService.deleteUserSession({ sessionId });
+    context.res.clearCookie("userSessionId");
+    return true;
+  } catch (e) {
+    throw new Error(">>> Deleting user session failed with error: " + e);
+  }
 };
 
 export default deleteUserSessionResolver;
