@@ -7,7 +7,7 @@ import graphqlClient from "#root/api/graphqlClient";
 import { setSession } from "#root/store/ducks/session";
 
 import AccountDetails from "./AccountDetails";
-// import Listings from "./Listings";
+import Listings from "./Listings";
 
 const query = gql`
   {
@@ -64,7 +64,7 @@ const Root = () => {
     <Wrapper>
       <Container>
         <Content>
-          {/*<Listings />*/}
+          <Listings />
         </Content>
         <Sidebar>
           <AccountDetails />
