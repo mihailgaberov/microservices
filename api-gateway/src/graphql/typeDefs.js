@@ -29,7 +29,7 @@ const typeDefs = gql`
   }
   
   type Query {
-    listings: [Listings!]!
+    listings: [Listing!]!
     userSession(me: Boolean!): UserSession
   }
 `;
