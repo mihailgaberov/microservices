@@ -3,7 +3,7 @@ import { gql } from "apollo-server";
 const typeDefs = gql`
   scalar Date
 
-  type Listings {
+  type Listing {
     description: String!,
     id: ID,
     title: String!
