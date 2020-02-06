@@ -39,17 +39,19 @@ const mutation = gql`
   }
 `;
 
-const AddListing = () => {
+const AddListing = ({ onAddListing: pushAddListing }) => {
   const {
     formState: { isSubmitting },
     handleSubmit,
     register,
     reset
   } = useForm();
+  const [createListing] = useMutation(mutation);
 
   const onSubmit = handleSubmit(async ({ title, description }) => {
-    console.log('>>> title:', title);
-    console.log('>>> desc: ', description);
+    await createListing({ variables: { description, title } });
+    reset();
+    pushAddListing();
   });
 
   return <Form onSubmit={onSubmit}>

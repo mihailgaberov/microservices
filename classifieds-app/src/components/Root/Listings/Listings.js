@@ -1,5 +1,5 @@
 import React from "react";
-import {useQuery} from "@apollo/react-hooks";
+import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import styled from "styled-components";
 import AddListing from "./AddListing";
@@ -33,7 +33,7 @@ const query = gql`
 `;
 
 const Listings = () => {
-  const {data, loading} = useQuery(query);
+  const { data, loading, refetch } = useQuery(query);
 
   if (loading) return "Loading...";
 
@@ -46,7 +46,7 @@ const Listings = () => {
         </Listing>
       ))}
     </div>
-    <AddListing />
+    <AddListing onAddListing={() => refetch()} />
   </div>
 };
 
