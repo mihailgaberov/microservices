@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import TextInput from "#root/components/shared/TextInput";
 import TextArea from "#root/components/shared/TextArea";
+import { useSelector } from "react-redux";
 
 const Button = styled.button`
   display: inline-block;
@@ -47,6 +48,9 @@ const AddListing = ({ onAddListing: pushAddListing }) => {
     reset
   } = useForm();
   const [createListing] = useMutation(mutation);
+  const session = useSelector(state => state.session);
+
+  if (!session) return <p>Please login to add listings.</p>;
 
   const onSubmit = handleSubmit(async ({ title, description }) => {
     await createListing({ variables: { description, title } });
