@@ -1,6 +1,7 @@
 import got from "got";
+import accessEnv from "#root/helpers/accessEnv";
 
-const LISTINGS_SERVICE_URI = "http://listings-service:7100";
+const LISTINGS_SERVICE_URI = accessEnv("LISTINGS_SERVICE_URI");
 
 export default class ListingsService {
   static async fetchAllListings() {
