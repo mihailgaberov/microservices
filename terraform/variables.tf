@@ -5,6 +5,7 @@ variable "aws-access-key" {
 variable "aws-secret-key" {
     type = string
 }
+
 variable "aws-region" {
     type = string
 }
