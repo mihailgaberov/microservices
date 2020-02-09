@@ -7,7 +7,7 @@ resource "aws_instance" "default" {
   subnet_id = "var.subnet-ip"
   vpc_security_group_ids = var.vpc-security-group-ids
 
-  tags {
+  tags = {
     Name = var.name
   }
 }
