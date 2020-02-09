@@ -9,3 +9,10 @@ variable "aws-secret-key" {
 variable "aws-region" {
     type = string
 }
+
+variable "listings-service-db-password" {
+    type = string
+}
+variable "listings-service-db-username" {
+    type = string
+}
