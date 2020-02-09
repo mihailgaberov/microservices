@@ -21,7 +21,7 @@ variable "identifier" {
 }
 
 variable "instance-class" {
-  default = "db.12.micro"
+  default = "db.t2.micro"
   type = string
 }
 
