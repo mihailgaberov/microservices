@@ -6,6 +6,7 @@ module "users-service" {
   source = "./node-server"
 
   ami-id = "ami-07cda0db070313c52"
+  iam-instance-profile = module.users-service-codedeploy.iam-instance-profile
   key-pair = aws_key_pair.microservices-key.key_name
   name = "users-service"
   private-ip = "10.0.1.6"
@@ -15,6 +16,13 @@ module "users-service" {
     aws_security_group.allow-ssh.id,
     aws_security_group.allow-all-outbound.id
   ]
+}
+
+module "users-service-codedeploy" {
+  source = "./codedeploy-app"
+
+  app-name = "users-service"
+  ec2-instance-name = module.users-service.name
 }
 
 module "users-service-db" {
