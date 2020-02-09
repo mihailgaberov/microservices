@@ -85,7 +85,7 @@ resource "aws_security_group" "allow-all-outbound" {
   description = "Allow all oubound traffic"
   vpc_id = aws_vpc.microservices.id
 
-  ingress {
+  egress {
     from_port = 0
     protocol = "-1"
     to_port = 0
