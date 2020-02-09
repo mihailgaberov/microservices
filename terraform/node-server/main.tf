@@ -8,6 +8,6 @@ resource "aws_instance" "default" {
   vpc_security_group_ids = var.vpc-security-group-ids
 
   tags {
-    Name: var.name
+    Name = var.name
   }
 }
