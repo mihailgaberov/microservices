@@ -12,15 +12,11 @@ variable "instance-type" {
   type = string
 }
 
-variable "name" {
-  type = string
-}
-
 variable "key-pair" {
   type = string
 }
 
-variable "key-pair-key" {
+variable "name" {
   type = string
 }
 
@@ -30,6 +26,7 @@ variable "private-ip" {
 }
 
 variable "subnet-id" {
+  default = ""
   type = string
 }
 
