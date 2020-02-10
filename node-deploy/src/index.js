@@ -7,7 +7,7 @@ const fs = require("fs");
 const path = require("path");
 const util = require("util");
 
-const deploymentDir = process.env.arg[2];
+const deploymentDir = process.argv[2];
 const deploymentDirName = path.basename(deploymentDir);
 
 const rel = relPath => path.resolve(deploymentDir, relPath);
@@ -15,12 +15,12 @@ const rel = relPath => path.resolve(deploymentDir, relPath);
 const tfFilePath = rel("../terraform/terraform.tfstate");
 
 if (!fs.existsSync(tfFilePath)) {
-  throw new Error("Terraform state file does not exist. Have you run \"terraform apply\"?");
+  throw new Error('Terraform state file does not exist! Have you run "terraform apply"?');
 }
 
 const { outputs } = JSON.parse(fs.readFileSync(tfFilePath, "utf-8"));
 
-require("dotenv").config({path: rel("./.deploy.env") });
+require("dotenv").config({ path: rel("./.deploy.env") });
 
 const accessEnv = require("./helpers/accessEnv");
 
@@ -30,7 +30,7 @@ const getFullDate = () => format(new Date(), "yyyyMMddHHmmss");
 
 const APPLICATION_NAME = accessEnv("APPLICATION_NAME");
 
-const MAX_BUFFER_SIZE = 1024 * 1024; // 1MiB
+const MAX_BUFFER_SIZE = 1024 * 1024; // 1 MiB
 
 const awsRegion = outputs["aws-region"].value;
 
@@ -45,41 +45,41 @@ const s3Client = new AWS.S3({
   accessKeyId: accessEnv("AWS_ACCESS_KEY_ID"),
   endpoint: new AWS.Endpoint(`https://s3.${awsRegion}.amazonaws.com/`),
   s3ForcePathStyle: true,
-  region: awsRegion,
   secretAccessKey: accessEnv("AWS_ACCESS_KEY_SECRET")
 });
 
 const rootDir = rel("../");
 
 (async () => {
-  console.log('Deploying in 3 seconds...');
-
-  await new Promise(resolve => setTimeout(resolve,3000));
+  console.log("Deploying in 3 seconds...");
+  await new Promise(resolve => setTimeout(resolve, 3000));
 
   const lockFilePath = rel("../deploy.lock");
-  console.error("Checking for lockfile...");
+  console.log("Checking for lockfile...");
   if (fs.existsSync(lockFilePath)) {
     console.error("Lockfile deploy.lock found! Halting...");
     process.exit();
   }
 
-  console.error("Creating lockfile...");
+  console.log("Creating lockfile...");
   fs.writeFileSync(
     lockFilePath,
-    "This stops node-deploy from running concurrently with itself. Remove this if note-deploy complains.");
+    "This stops node-deploy from running concurrently with itself. Remove this if node-deploy complains."
+  );
 
-  console.error("Checking environment...");
+  console.log("Checking environment...");
   if (!fs.existsSync(rel(".production.env"))) {
-    console.error("No .production.env found! Halting ...");
+    console.error("No .production.env found! Halting...");
     process.exit();
   }
 
-  console.error("Copying appspec...");
+  console.log("Copying appspec...");
   fs.copyFileSync(rel("./appspec.yml"), rel("../appspec.yml"));
 
-  console.error("Generating deployment file");
+  console.log("Generating deployment file...");
   const filename = `${deploymentDirName}-deployment-${getFullDate()}.zip`;
-  const zipPath = `/tmp/${filename}`;await exec(
+  const zipPath = `/tmp/${filename}`;
+  await exec(
     `zip -r ${zipPath} . -x terraform/\\* -x node_modules/\\* -x \\*/node_modules/\\* -x \\*/.cache/\\* -x .git/\\* -x \\*.DS_Store`,
     { cwd: rootDir, maxBuffer: MAX_BUFFER_SIZE }
   );

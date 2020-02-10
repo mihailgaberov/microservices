@@ -11,7 +11,7 @@ hooks:
       runas: root
     - location: api-gateway/aws/codedeploy/BeforeInstall/1_removePreviousInstallation.sh
       timeout: 300
-      runas: ec2-user
+      runas: root
   AfterInstall:
     - location: api-gateway/aws/codedeploy/AfterInstall/0_changePermissions.sh
       timeout: 300
