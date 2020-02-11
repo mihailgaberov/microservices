@@ -10,8 +10,6 @@ const util = require("util");
 const deploymentDir = process.argv[2];
 const deploymentDirName = path.basename(deploymentDir);
 
-console.log('>>>>>>>>>>>>>', deploymentDirName);
-
 const rel = relPath => path.resolve(deploymentDir, relPath);
 
 const tfFilePath = rel("../terraform/terraform.tfstate");
@@ -21,6 +19,8 @@ if (!fs.existsSync(tfFilePath)) {
 }
 
 const { outputs } = JSON.parse(fs.readFileSync(tfFilePath, "utf-8"));
+
+console.log('>>>', outputs);
 
 require("dotenv").config({ path: rel("./.deploy.env") });
 
