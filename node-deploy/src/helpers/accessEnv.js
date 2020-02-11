@@ -13,4 +13,4 @@ const accessEnv = (key, defaultValue) => {
   return process.env[key];
 };
 
-export default accessEnv;
+module.exports = accessEnv;

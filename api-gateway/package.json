@@ -5,9 +5,9 @@
   "license": "MIT",
   "scripts": {
     "build": "webpack --progress",
-    "deploy": "node-deploy $(pwd)",
-    "watch": "babel-watch -L src/index.js",
-    "linkall": "yarn link node-deploy"
+    "deploy": "node-deploy ../node-deploy",
+    "linkall": "yarn link node-deploy",
+    "watch": "babel-watch -L src/index.js"
   },
   "devDependencies": {
     "node-deploy": "../node-deploy",
