@@ -47,6 +47,6 @@ output "users-service-db-address" {
   value = module.users-service-db.address
 }
 
-output "users-service-privage-ip" {
+output "users-service-private-ip" {
   value = aws_eip.users-service-eip.private_ip
 }
