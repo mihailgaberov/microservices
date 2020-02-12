@@ -20,8 +20,6 @@ if (!fs.existsSync(tfFilePath)) {
 
 const { outputs } = JSON.parse(fs.readFileSync(tfFilePath, "utf-8"));
 
-console.log('>>>', outputs);
-
 require("dotenv").config({ path: rel("./.deploy.env") });
 
 const accessEnv = require("./helpers/accessEnv");
