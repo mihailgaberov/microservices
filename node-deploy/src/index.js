@@ -79,10 +79,17 @@ const rootDir = rel("../");
   console.log("Generating deployment file...");
   const filename = `${deploymentDirName}-deployment-${getFullDate()}.zip`;
   const zipPath = `/tmp/${filename}`;
-  await exec(
-    `zip -r ${zipPath} . -x terraform/\\* -x node_modules/\\* -x \\*/node_modules/\\* -x \\*/.cache/\\* -x .git/\\* -x \\*.DS_Store`,
+  // Compress-Archive -Path input.txt -DestinationPath output.zip
+  await exec(`Compress-Archive -Path ${zipPath} -DestinationPath .`);
+  /*await exec(
+    `zip -r ${zipPath} .
+    -x terraform/\\*
+    -x node_modules/\\*
+    -x \\*!/node_modules/\\*
+    -x \\*!/.cache/\\*
+    -x .git/\\* -x \\*.DS_Store`,
     { cwd: rootDir, maxBuffer: MAX_BUFFER_SIZE }
-  );
+  );*/
 
   console.log("Uploading deployment file...");
   await s3Client
