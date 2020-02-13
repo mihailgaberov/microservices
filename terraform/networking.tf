@@ -10,7 +10,7 @@ resource "aws_internet_gateway" "microservices" {
   vpc_id = aws_vpc.microservices.id
 }
 
-resource "aws_route_table" "public" {
+resource "aws_route_table" "allow-outgoing-access" {
   vpc_id = aws_vpc.microservices.id
 
   route {
@@ -19,13 +19,25 @@ resource "aws_route_table" "public" {
   }
 
   tags = {
-    Name = "Public Route Table"
+    Name = "Route Table Allowing Outgoing Access"
   }
 }
 
+/*
 resource "aws_route_table_association" "microservices-subnet-public" {
   subnet_id = aws_subnet.microservices-subnet-public.id
   route_table_id = aws_route_table.public.id
+}
+*/
+
+resource "aws_route_table_association" "microservices-subnet-public" {
+  subnet_id      = aws_subnet.microservices-subnet-public.id
+  route_table_id = aws_route_table.allow-outgoing-access.id
+}
+
+resource "aws_route_table_association" "microservices-demo-subnet-private-1" {
+  subnet_id      = aws_subnet.microservices-subnet-private-1.id
+  route_table_id = aws_route_table.allow-outgoing-access.id
 }
 
 resource "aws_security_group" "allow-internal-http" {
