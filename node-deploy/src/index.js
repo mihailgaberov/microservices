@@ -30,7 +30,7 @@ const getFullDate = () => format(new Date(), "yyyyMMddHHmmss");
 
 const APPLICATION_NAME = accessEnv("APPLICATION_NAME");
 
-const MAX_BUFFER_SIZE = 1024 * 1024; // 1 MiB
+const MAX_BUFFER_SIZE = 2 * 1024 * 1024; // 1 MiB
 
 const awsRegion = outputs["aws-region"].value;
 
@@ -85,7 +85,8 @@ const rootDir = rel("../");
     -x node_modules/\\*
     -x \\*!/node_modules/\\*
     -x \\*/.cache/\\*
-    -x .git/\\* -x \\*.DS_Store`,
+    -x .git/\\* 
+    -x \\*.DS_Store`,
     { cwd: rootDir, maxBuffer: MAX_BUFFER_SIZE }
   );
 
