@@ -30,7 +30,7 @@ const getFullDate = () => format(new Date(), "yyyyMMddHHmmss");
 
 const APPLICATION_NAME = accessEnv("APPLICATION_NAME");
 
-const MAX_BUFFER_SIZE = 2 * 1024 * 1024; // 1 MiB
+const MAX_BUFFER_SIZE = 1024 * 1024; // 1 MiB
 
 const awsRegion = outputs["aws-region"].value;
 
@@ -80,13 +80,7 @@ const rootDir = rel("../");
   const filename = `${deploymentDirName}-deployment-${getFullDate()}.zip`;
   const zipPath = `/tmp/${filename}`;
   await exec(
-    `zip -r ${zipPath} .
-    -x terraform/\\*
-    -x node_modules/\\*
-    -x \\*!/node_modules/\\*
-    -x \\*/.cache/\\*
-    -x .git/\\* 
-    -x \\*.DS_Store`,
+    `7z a -tzip ${zipPath} .`,
     { cwd: rootDir, maxBuffer: MAX_BUFFER_SIZE }
   );
 
@@ -94,7 +88,7 @@ const rootDir = rel("../");
   await s3Client
     .putObject({
       Body: fs.createReadStream(zipPath),
-      Bucket: outputs[`${APPLICATION_NAME}-deployment-bucket-name`].value,
+      Bucket: outputs[`${APPLICATION_NAME}-codedeploy-bucket-name`].value,
       Key: filename
     })
     .promise();
@@ -113,7 +107,7 @@ const rootDir = rel("../");
       revision: {
         revisionType: "S3",
         s3Location: {
-          bucket: outputs[`${APPLICATION_NAME}-deployment-bucket-name`].value,
+          bucket: outputs[`${APPLICATION_NAME}-codedeploy-bucket-name`].value,
           bundleType: "zip",
           key: filename
         }
