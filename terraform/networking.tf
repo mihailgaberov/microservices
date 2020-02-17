@@ -23,13 +23,6 @@ resource "aws_route_table" "allow-outgoing-access" {
   }
 }
 
-/*
-resource "aws_route_table_association" "microservices-subnet-public" {
-  subnet_id = aws_subnet.microservices-subnet-public.id
-  route_table_id = aws_route_table.public.id
-}
-*/
-
 resource "aws_route_table_association" "microservices-subnet-public" {
   subnet_id      = aws_subnet.microservices-subnet-public.id
   route_table_id = aws_route_table.allow-outgoing-access.id
