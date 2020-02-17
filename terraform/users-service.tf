@@ -1,5 +1,5 @@
 resource "aws_eip" "users-service-eip" {
-  instance = module.api-gateway.instance-id
+  instance = module.users-service.instance-id
 }
 
 module "users-service" {
