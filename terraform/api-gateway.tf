@@ -7,7 +7,7 @@ module "api-gateway" {
 
   ami-id = "ami-0df0e7600ad0913a9"
   iam-instance-profile = module.api-gateway-codedeploy.iam-instance-profile
-  key-pair = aws_key_pair.microservices-key.key_name
+  key-pair = aws_key_pair.microservices-demo-key.key_name
   name = "api-gateway"
   subnet-id = aws_subnet.microservices-subnet-public.id
   vpc-security-group-ids = [
