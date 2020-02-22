@@ -4,6 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "build": "rm -rf dist && NODE_ENV=production parcel build src/index.html",
+    "deploy": "./deploy.sh",
+    "predeploy": "yarn build",
     "watch": "parcel --port=7001 src/index.html"
   },
   "devDependencies": {

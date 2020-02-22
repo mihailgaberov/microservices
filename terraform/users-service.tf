@@ -5,9 +5,9 @@ resource "aws_eip" "users-service-eip" {
 module "users-service" {
   source = "./node-server"
 
-  ami-id = "ami-07cda0db070313c52"
+  ami-id = "ami-0df0e7600ad0913a9"
   iam-instance-profile = module.users-service-codedeploy.iam-instance-profile
-  key-pair = aws_key_pair.microservices-key.key_name
+  key-pair = aws_key_pair.microservices-demo-key.key_name
   name = "users-service"
   private-ip = "10.0.1.6"
   subnet-id = aws_subnet.microservices-subnet-private-1.id
